@@ -20,9 +20,13 @@ const Tictactoe = () => {
   const [play, setPlay] = useState(false);
   // let [data, setData] = useState(null);
   let [count, setCount] = useState(0);
+  let [xscore, setXScore] = useState(0);
+  let [oscore, setOScore] = useState(0);
+  const [viewscore, setViewScore] = useState(false);
 
   const playHandler = () => {
     if (play) {
+      setViewScore(false);
       setPlay(false);
       // setData(null);
       setCount(0);
@@ -34,6 +38,7 @@ const Tictactoe = () => {
     } else {
       setPlay(true);
       console.log("play ", data);
+      setViewScore(false);
     }
   };
 
@@ -52,6 +57,10 @@ const Tictactoe = () => {
     }
     setCount(++count);
     winnerLogic();
+  };
+
+  const scoreHandler = () => {
+    setViewScore(true);
   };
 
   const winnerLogic = () => {
@@ -77,70 +86,106 @@ const Tictactoe = () => {
   const winner = (data) => {
     setPlay(false);
     console.log("winner is ", data);
+    if (data === "X") {
+      setXScore(++xscore);
+    } else {
+      setOScore(++oscore);
+    }
+    console.log(xscore, oscore);
     playHandler();
   };
 
   return (
-    <div className="game" id="game">
-      <h1>TicTacToe </h1>
-      <div className="game-table">
-        <div className="game-table-row1">
-          <div
-            className="boxes"
-            onClick={(e) => gameHandler(e, 1)}
-            ref={box1}
-          ></div>
-          <div
-            className="boxes"
-            onClick={(e) => gameHandler(e, 2)}
-            ref={box2}
-          ></div>
-          <div
-            className="boxes"
-            onClick={(e) => gameHandler(e, 3)}
-            ref={box3}
-          ></div>
+    <>
+      {!viewscore ? (
+        <div className="game" id="game">
+          <h1>
+            Tic<span className="tac-span">Tac</span>Toe{" "}
+          </h1>
+          <div className="game-table">
+            <div className="game-table-row1">
+              <div
+                className="boxes"
+                onClick={(e) => gameHandler(e, 1)}
+                ref={box1}
+              ></div>
+              <div
+                className="boxes"
+                onClick={(e) => gameHandler(e, 2)}
+                ref={box2}
+              ></div>
+              <div
+                className="boxes"
+                onClick={(e) => gameHandler(e, 3)}
+                ref={box3}
+              ></div>
+            </div>
+            <div className="game-table-row2">
+              <div
+                className="boxes"
+                onClick={(e) => gameHandler(e, 4)}
+                ref={box4}
+              ></div>
+              <div
+                className="boxes"
+                onClick={(e) => gameHandler(e, 5)}
+                ref={box5}
+              ></div>
+              <div
+                className="boxes"
+                onClick={(e) => gameHandler(e, 6)}
+                ref={box6}
+              ></div>
+            </div>
+            <div className="game-table-row3">
+              <div
+                className="boxes"
+                onClick={(e) => gameHandler(e, 7)}
+                ref={box7}
+              ></div>
+              <div
+                className="boxes"
+                onClick={(e) => gameHandler(e, 8)}
+                ref={box8}
+              ></div>
+              <div
+                className="boxes"
+                onClick={(e) => gameHandler(e, 9)}
+                ref={box9}
+              ></div>
+            </div>
+          </div>
         </div>
-        <div className="game-table-row2">
-          <div
-            className="boxes"
-            onClick={(e) => gameHandler(e, 4)}
-            ref={box4}
-          ></div>
-          <div
-            className="boxes"
-            onClick={(e) => gameHandler(e, 5)}
-            ref={box5}
-          ></div>
-          <div
-            className="boxes"
-            onClick={(e) => gameHandler(e, 6)}
-            ref={box6}
-          ></div>
+      ) : (
+        <div className="score-container">
+          <div className="score-table">
+            <table>
+              <thead className="score-table-head">
+                <th className="score-table-headdata">Score of "X"</th>
+                <th className="score-table-headdata">Score of "O"</th>
+              </thead>
+              <tbody className="score-table-body">
+                <tr>
+                  <td className="score-table-data">{xscore}</td>
+                  <td className="score-table-data">{oscore}</td>
+                </tr>
+              </tbody>
+              </table>
+          </div>
         </div>
-        <div className="game-table-row3">
-          <div
-            className="boxes"
-            onClick={(e) => gameHandler(e, 7)}
-            ref={box7}
-          ></div>
-          <div
-            className="boxes"
-            onClick={(e) => gameHandler(e, 8)}
-            ref={box8}
-          ></div>
-          <div
-            className="boxes"
-            onClick={(e) => gameHandler(e, 9)}
-            ref={box9}
-          ></div>
-        </div>
-      </div>
+      )}
 
       <button className="game-reset" id="reset" onClick={playHandler}>
         {play ? "Reset" : "Play"}
       </button>
-    </div>
+      {!play ? (
+        <button className="game-score" id="score" onClick={scoreHandler}>
+          View Score
+        </button>
+      ) : (
+        ""
+      )}
+    </>
   );
 };
 

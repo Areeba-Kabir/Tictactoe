@@ -1,9 +1,22 @@
 .game h1 {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: cursive;
   font-weight: 900;
-  color: rgb(39, 2, 73);
+  color: white;
   text-shadow: #00000081;
   font-size: 3rem;
+}
+
+h1:hover {
+  animation: tictactoe 3s forwards infinite;
+}
+
+h1 span {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 1000;
+  color: blanchedalmond;
+  background-color: rgb(39, 2, 73);
+  margin: 7px;
+  padding: 5px;
 }
 
 .game-table {
@@ -20,7 +33,7 @@
   padding: 5px;
   border-radius: 10px;
   box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.5);
-  margin: 2px;
+  margin: 5px;
   display: flex;
   align-content: center;
   background-color: wheat;
@@ -28,7 +41,8 @@
 }
 
 .boxes:hover,
-.game-reset:hover {
+.game-reset:hover,
+.game-score:hover {
   transform: scale(0.9);
   cursor: pointer;
 }
@@ -40,7 +54,8 @@
   margin: 35px;
 }
 
-.game-reset {
+.game-reset,
+.game-score {
   margin: 20px;
   height: 60px;
   width: 150px;
@@ -51,4 +66,56 @@
   font-weight: 600;
   font-size: larger;
   box-shadow: 10px 10px 15px #00000081;
+}
+
+.game-score {
+  font-weight: 400;
+}
+
+@keyframes tictactoe {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  70% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(0.5);
+  }
+}
+
+.score-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.score-table {
+  margin: 110px;
+}
+
+table {
+  padding: 15px;
+  border: 1px solid grey;
+  height: 200px;
+  width: 620px;
+  box-shadow: 10px 10px 15px #00000081;
+}
+
+thead {
+  color: rgb(255, 255, 255);
+  text-shadow: #f1c7c781;
+  font-weight: 900;
+  font-size: 50px;
+}
+
+tbody {
+  color: rgb(63, 0, 66);
+  font-weight: 900;
+  font-size: 120px;
 }
